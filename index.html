@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Run & Escape</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="game-wrapper">
+
+    <div class="top-bar">
+      <div class="game-title">🏃 RUN & ESCAPE</div>
+      <div class="score-box">Score: <span id="score">0</span></div>
+    </div>
+
+    <div id="game">
+
+      <div class="sky">
+        <div class="cloud cloud1">☁️</div>
+        <div class="cloud cloud2">☁️</div>
+      </div>
+
+      <div id="message">
+        <h1>🏃 RUN & ESCAPE</h1>
+        <p>Avoid the crow and goat!</p>
+        <button id="startBtn">START GAME</button>
+      </div>
+
+      <div id="player">
+        <img src="player.png" alt="Player">
+      </div>
+
+      <div id="crow">🐦‍⬛</div>
+      <div id="goat">🐐</div>
+
+      <div class="ground">
+        <div class="ground-line"></div>
+      </div>
+
+      <div id="gameOver">
+        <h1>GAME OVER</h1>
+        <p>Your Score: <span id="finalScore">0</span></p>
+        <button id="restartBtn">RESTART</button>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button id="duckBtn" class="control-btn duck-btn">
+        <span>⬇️</span>
+        DUCK
+      </button>
+
+      <button id="jumpBtn" class="control-btn jump-btn">
+        <span>⬆️</span>
+        JUMP
+      </button>
+    </div>
+
+    <div class="instructions">
+      <p>📱 Mobile: Use the buttons</p>
+      <p>⌨️ PC: SPACE = Jump &nbsp; | &nbsp; ↓ = Duck</p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+          </html>
