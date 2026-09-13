@@ -1,0 +1,411 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #111827;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.game-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px;
+}
+
+.top-bar {
+  height: 55px;
+  background: #1f2937;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+  border-radius: 14px 14px 0 0;
+}
+
+.game-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.score-box {
+  font-size: 18px;
+  font-weight: bold;
+  background: #374151;
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+#game {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #70c9ff 0%,
+    #b9e7ff 65%,
+    #d8f3dc 65%,
+    #d8f3dc 100%
+  );
+}
+
+/* SKY */
+
+.sky {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 55px;
+  opacity: 0.8;
+}
+
+.cloud1 {
+  top: 55px;
+  left: 12%;
+}
+
+.cloud2 {
+  top: 120px;
+  right: 15%;
+}
+
+/* PLAYER */
+
+#player {
+  position: absolute;
+  left: 100px;
+  bottom: 65px;
+  width: 80px;
+  height: 120px;
+  z-index: 10;
+  transition: height 0.15s, bottom 0.15s;
+}
+
+#player img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* DUCK */
+
+#player.ducking {
+  height: 70px;
+  bottom: 65px;
+}
+
+#player.ducking img {
+  transform: scaleY(0.7);
+}
+
+/* JUMP */
+
+#player.jumping {
+  animation: jumpAnimation 0.65s ease-out;
+}
+
+@keyframes jumpAnimation {
+  0% {
+    bottom: 65px;
+  }
+
+  45% {
+    bottom: 230px;
+  }
+
+  100% {
+    bottom: 65px;
+  }
+}
+
+/* CROW */
+
+#crow {
+  position: absolute;
+  right: -100px;
+  top: 115px;
+  font-size: 65px;
+  z-index: 8;
+  display: none;
+}
+
+/* GOAT */
+
+#goat {
+  position: absolute;
+  right: -120px;
+  bottom: 62px;
+  font-size: 75px;
+  z-index: 8;
+  display: none;
+}
+
+/* OBSTACLE ANIMATION */
+
+#crow.fly {
+  display: block;
+  animation: crowMove 2.2s linear forwards;
+}
+
+@keyframes crowMove {
+  from {
+    right: -100px;
+  }
+
+  to {
+    right: 110%;
+  }
+}
+
+#goat.run {
+  display: block;
+  animation: goatMove 2.5s linear forwards;
+}
+
+@keyframes goatMove {
+  from {
+    right: -120px;
+  }
+
+  to {
+    right: 110%;
+  }
+}
+
+/* GROUND */
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background: #6b8e23;
+  border-top: 5px solid #4d6b17;
+  z-index: 5;
+}
+
+.ground-line {
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 30px,
+    rgba(255,255,255,0.15) 31px,
+    transparent 33px
+  );
+}
+
+/* START MESSAGE */
+
+#message {
+  position: absolute;
+  z-index: 30;
+  width: 90%;
+  max-width: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(17, 24, 39, 0.94);
+  color: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+#message h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+#message p {
+  margin-bottom: 22px;
+  font-size: 17px;
+}
+
+/* GAME OVER */
+
+#gameOver {
+  position: absolute;
+  z-index: 40;
+  width: 90%;
+  max-width: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(17, 24, 39, 0.96);
+  color: white;
+  padding: 35px;
+  border-radius: 20px;
+  text-align: center;
+  display: none;
+}
+
+#gameOver h1 {
+  color: #ff5252;
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+#gameOver p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* BUTTON */
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#startBtn,
+#restartBtn {
+  background: #22c55e;
+  color: white;
+  padding: 13px 28px;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+#startBtn:active,
+#restartBtn:active {
+  transform: scale(0.95);
+}
+
+/* MOBILE CONTROLS */
+
+.controls {
+  display: flex;
+  gap: 15px;
+  padding: 15px 0;
+  background: #111827;
+}
+
+.control-btn {
+  flex: 1;
+  min-height: 70px;
+  border-radius: 15px;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  touch-action: manipulation;
+}
+
+.control-btn span {
+  font-size: 28px;
+}
+
+.duck-btn {
+  background: #2563eb;
+}
+
+.jump-btn {
+  background: #16a34a;
+}
+
+.control-btn:active {
+  transform: scale(0.94);
+}
+
+/* INSTRUCTIONS */
+
+.instructions {
+  background: #1f2937;
+  color: #d1d5db;
+  text-align: center;
+  padding: 12px;
+  border-radius: 0 0 14px 14px;
+  font-size: 13px;
+}
+
+.instructions p {
+  margin: 3px;
+}
+
+/* SMALL SCREEN */
+
+@media (max-width: 600px) {
+
+  body {
+    align-items: flex-start;
+  }
+
+  .game-wrapper {
+    padding: 5px;
+  }
+
+  .top-bar {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .game-title {
+    font-size: 15px;
+  }
+
+  .score-box {
+    font-size: 15px;
+    padding: 6px 10px;
+  }
+
+  #game {
+    height: 430px;
+  }
+
+  #player {
+    left: 45px;
+    width: 70px;
+    height: 105px;
+  }
+
+  #player.ducking {
+    height: 65px;
+  }
+
+  #crow {
+    font-size: 55px;
+  }
+
+  #goat {
+    font-size: 65px;
+  }
+
+  #message h1 {
+    font-size: 25px;
+  }
+
+  #gameOver h1 {
+    font-size: 32px;
+  }
+
+  .control-btn {
+    min-height: 65px;
+    font-size: 16px;
+  }
+
+  .control-btn span {
+    font-size: 23px;
+  }
+  }
